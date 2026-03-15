@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from anthropic import Anthropic
 from agents.state import ApplicationState
-from tools.web_search import search_multiple
+from tools.web_search import search_multiple_queries
 import json
 
 load_dotenv()
@@ -44,7 +44,7 @@ def run_research_searches(company_name, job_title):
         f"{company_name} {job_title} responsibilities requirements",
     ]
     
-    search_results = search_multiple(queries)
+    search_results = search_multiple_queries(queries)
     
     results = {
         "raw_company_overview": search_results[queries[0]],
@@ -54,6 +54,7 @@ def run_research_searches(company_name, job_title):
         "raw_role_priorities": search_results[queries[0]],
     }
     
+    return results
 
 def construct_results(company_name, job_title, raw_results, job_description):
     
@@ -62,7 +63,7 @@ def construct_results(company_name, job_title, raw_results, job_description):
     You are a career research analyst. You have gathered raw web search results about {company_name} and the role of {job_title}.
     
     Construct the information below into clean, concise summaries for each section.
-    Each section should be 3-5 sentences. Be specific — avoid generic filler.
+    Each section should be 6-8 sentences. Be specific — avoid generic filler.
     
     <job_description>
     {job_description}

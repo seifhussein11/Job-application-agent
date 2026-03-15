@@ -15,7 +15,7 @@ def search(query : str, max_results : int = 5):
         
         response = client.search(query=query, max_results= max_results,search_depth="advanced")
         
-        results = response.get(results, [])
+        results = response.get("results", [])
         
         if not results:
             return "No results were found"
@@ -25,8 +25,8 @@ def search(query : str, max_results : int = 5):
         for result in results:
             
             formatted_results.append(
-                f"Source: {result.get('url', 'unknown')}\n",
-                f"Title: {result.get('title', '')}\n",
+                f"Source: {result.get('url', 'unknown')}\n"
+                f"Title: {result.get('title', '')}\n"
                 f"Content: {result.get('content', '')}\n"   
             )
             
