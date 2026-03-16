@@ -79,6 +79,7 @@ def tailor_cv(state: ApplicationState):
     3. Identify which experiences are most relevant to lead with
     4. Plan on how to rephrase the profile/summary section
     5. Plan on how to reorder the skills section
+    7. If there is a section for projects, re-order and rewrite the projects to emphasise the keywords and skills identified in job description.
     6. Rewrite the CV with these changes applied
         
     Return ONLY the full rewritten CV text. No commentary, no explanation.

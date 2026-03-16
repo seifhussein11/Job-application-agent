@@ -3,3 +3,5 @@ jobsAppsVenv/
 __pycache__/
 *.pyc
 .DS_Store
+models/scorer_dataset/scorer_checkpoint/
+models/scorer_dataset/training_dataset.json/

@@ -9,3 +9,8 @@ pymupdf
 streamlit
 pandas
 pytest
+datasets
+scikit-learn
+torch
+numpy<2
+sentence-transformers==2.7.0

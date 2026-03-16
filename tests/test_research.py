@@ -153,4 +153,12 @@ print("="*60)
 print(result['cover_letter'])
 
 print("\n" + "="*60)
+print("MATCH SCORES")
+print("="*60)
+print(f"Raw CV score:     {result['raw_match_score']:.3f}")
+print(f"Tailored score:   {result['tailored_match_score']:.3f}")
+improvement = result['tailored_match_score'] - result['raw_match_score']
+print(f"Improvement:      {improvement:+.3f}")
+
+print("\n" + "="*60)
 print(f"Status: {result['status']}")
