@@ -10,7 +10,23 @@ client = Anthropic()
 used_model = "claude-sonnet-4-5"
 
 
+def judge_agent_feedback(state: ApplicationState):
+    
+    if state["revision_count"] == 0:
+        return ""
+    
+    feedback = f"""
+    This is revision {state['revision_count']}. The previous version was rejected.
+    Judge feedback: {state['judge_feedback']}
+    Judge score : {state['judge_score']}
+    Address this feedback specifically in your rewrite.
+    """
+    
+    return feedback
+
+
 def tailor_cv(state: ApplicationState):
+    feedback = judge_agent_feedback(state)
     
     prompt = f"""
     
@@ -28,6 +44,7 @@ def tailor_cv(state: ApplicationState):
     - Keep the length of the CV the same, only editing
     
     
+    
     Here are two examples of how to rewrite a bullet point:
 
     EXAMPLE 1:
@@ -43,6 +60,10 @@ def tailor_cv(state: ApplicationState):
     cross-functional stakeholders including product and engineering leads"
     
     Now tailor this CV:
+    
+    <judge_feedback>
+    {feedback}
+    </judge_feedback>
     
     <job_description>
     {state['job_description']}
@@ -98,6 +119,7 @@ def tailor_cv(state: ApplicationState):
 
 
 def generate_cover_letter(state: ApplicationState):
+    feedback = judge_agent_feedback(state)
     
     user_prompt= f"""
     
@@ -121,6 +143,10 @@ def generate_cover_letter(state: ApplicationState):
     - Do not use cliche or cringey writing
     
     The goal is to produce a compelling cover letter that passes ATS screening and strongly increases the candidate's chances of getting an interview.
+    
+    <judge_feedback>
+    {feedback}
+    </judge_feedback>
     
     
     <job_description>

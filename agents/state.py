@@ -24,6 +24,7 @@ class ApplicationState(TypedDict):
     tailored_match_score : float
     
     judge_feedback : str
+    judge_score : float
     revision_count : int
     approved : bool
     
@@ -49,6 +50,7 @@ def initial_state(job_description : str, input_cv : str):
         raw_match_score= 0.0,
         tailored_match_score= 0.0,
         judge_feedback= "",
+        judge_score = 0.0,
         revision_count= 0,
         approved= False,
         created_at= datetime.now().isoformat,
