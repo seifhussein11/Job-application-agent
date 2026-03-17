@@ -210,6 +210,10 @@ def generate_cover_letter(state: ApplicationState):
 
 def run(state: ApplicationState):
     
+    state["tailored_match_score"] = 0.0
+    state["judge_score"] = 0.0
+    state["approved"] = False
+    
     print("tailoring agent started\n")
     
     try:
