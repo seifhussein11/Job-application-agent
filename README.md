@@ -1,4 +1,4 @@
-# 🤖 AI Job Application Agent
+AI Job Application Agent
 
 An autonomous multi-agent system that takes a job description and your CV, researches the company, tailors your application, scores the match using a fine-tuned model, and tracks everything in a Streamlit dashboard.
 
@@ -6,7 +6,7 @@ Built with LangGraph, Claude API, and a fine-tuned relevance scoring model.
 
 ---
 
-## 🎯 What It Does
+## What It Does
 
 1. **Researches the company** — autonomously gathers information about the employer, role, and culture from the web
 2. **Tailors your CV and cover letter** — rewrites bullet points, adjusts keyword density, and restructures content to match the job description
@@ -16,7 +16,7 @@ Built with LangGraph, Claude API, and a fine-tuned relevance scoring model.
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 User Input (JD + CV)
@@ -43,13 +43,13 @@ Research  Tailoring    Scoring
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Component | Technology |
 |---|---|
 | Agent orchestration | LangGraph, LangChain |
 | LLM backbone | Claude API (claude-sonnet) |
-| Relevance scoring | Fine-tuned DistilBERT / sentence-transformers |
+| Relevance scoring | sentence-transformers |
 | Web research | Tavily Search API |
 | PDF I/O | PyMuPDF, ReportLab |
 | UI & tracking | Streamlit, SQLite |
@@ -57,7 +57,7 @@ Research  Tailoring    Scoring
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 job-application-agent/
@@ -90,69 +90,16 @@ job-application-agent/
 
 ---
 
-## 🚀 Getting Started
 
-### Prerequisites
 
-- Python 3.10+
-- API keys: Anthropic, Tavily
+##  Fine-tuned Scoring Model
 
-### Installation
+The scoring agent uses a Sentence-transformer model fine-tuned on CV–job description pairs labelled with relevance scores (0.0–1.0).
 
-```bash
-git clone https://github.com/yourusername/job-application-agent
-cd job-application-agent
-pip install -r requirements.txt
-```
 
-### Environment Variables
 
-Create a `.env` file:
 
-```env
-ANTHROPIC_API_KEY=your_key_here
-TAVILY_API_KEY=your_key_here
-```
 
-### Run the App
-
-```bash
-streamlit run ui/app.py
-```
-
----
-
-## 🧠 Fine-tuned Scoring Model
-
-The scoring agent uses a DistilBERT model fine-tuned on CV–job description pairs labelled with relevance scores (0.0–1.0).
-
-### Training the Model
-
-```bash
-python models/train_scorer.py \
-  --dataset models/scorer_dataset/pairs.csv \
-  --output models/scorer_checkpoint \
-  --epochs 5
-```
-
-### Evaluation Results
-
-| Model | Pearson r | MSE |
-|---|---|---|
-| Baseline (TF-IDF cosine) | 0.41 | 0.089 |
-| Fine-tuned DistilBERT | **0.78** | **0.031** |
-
-The fine-tuned model is hosted on HuggingFace Hub: [`yourusername/cv-jd-relevance-scorer`](https://huggingface.co)
-
----
-
-## 📊 Evaluation Framework
-
-The project includes a benchmark suite of 30 annotated examples to measure end-to-end quality:
-
-```bash
-python eval/benchmark.py --output eval/results.json
-```
 
 Metrics tracked:
 - Scoring model Pearson correlation vs human labels
@@ -162,37 +109,7 @@ Metrics tracked:
 
 ---
 
-## 📈 Example Output
 
-**Input:** A generic software engineering CV + a Senior ML Engineer job description at a fintech company
-
-**Research agent output:** Company overview, key tech stack, recent news, inferred team culture
-
-**Scoring agent:** Raw match score 0.41 → post-tailoring score 0.79
-
-**Tailored CV changes:**
-- Added 7 missing JD keywords across bullet points
-- Reordered experience section to lead with ML work
-- Rewrote 4 bullet points to use role-specific language
-
----
-
-## 🗺️ Roadmap
-
-- [ ] LinkedIn job scraper integration (auto-ingest JDs)
-- [ ] Multi-CV support (different base CVs for different roles)
-- [ ] Email integration (send applications directly)
-- [ ] Browser extension for one-click JD capture
-
----
-
-## 📄 License
-
-MIT
-
----
-
-## 👤 Author
 
 **Seif Hussein**  
 MSc Artificial Intelligence (Distinction) — University of Southampton  
